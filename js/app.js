@@ -1,3 +1,5 @@
+/* GLOBAL VARS */
+const cl = (input) => {console.log(input)};
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -12,7 +14,7 @@ let snake = [{ x: 10, y: 10 }];
 let food = { x: 0, y: 0 };
 let direction = "right";
 
-
+/* FUNCTION TO DRAW FOOD AND SNAKE */
 function draw() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvasSize, canvasSize);
@@ -20,12 +22,21 @@ function draw() {
     // Draw the snake
     ctx.fillStyle = "#00FF00";
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillRect(snake[i].x * boxSize, snake[i].y * boxSize, boxSize, boxSize);
+        const isHead = i === 0;
+        ctx.fillStyle = isHead ? "#00FF00" : "#008000"; //Head is green, body is dark green
+        ctx.beginPath();
+        ctx.arc((snake[i].x + 0.5) * boxSize, (snake[i].y + 0.5) * boxSize, boxSize / 2, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        //ctx.fillRect(snake[i].x * boxSize, snake[i].y * boxSize, boxSize, boxSize);
     }
 
     // Draw the food
     ctx.fillStyle = "#FF0000";
-    ctx.fillRect(food.x * boxSize, food.y * boxSize, boxSize, boxSize);
+    ctx.beginPath();
+    ctx.arc((food.x + 0.5) * boxSize, (food.y + 0.5) * boxSize, boxSize / 2, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
 }
 
 function generateFood() {
@@ -33,6 +44,7 @@ function generateFood() {
     food.y = Math.floor(Math.random() * (canvasSize / boxSize));
 }
 
+/* FUNCTION TO UPDATE SNAKE MOVEMENT AND UPDATE FOOD */
 function update() {
     // Move the snake
     let newHead = { x: snake[0].x, y: snake[0].y };
@@ -85,6 +97,7 @@ function update() {
     draw();
 }
 
+/* PAUSE & RESET GAME */
 function resetGame() {
     snake = [{ x: 10, y: 10 }];
     generateFood();
@@ -93,7 +106,6 @@ function resetGame() {
 
 // Generate initial food and start the game loop
 generateFood();
-// setInterval(update, 100);
 
 function startGame() {
   if (!nIntervId) {
@@ -109,7 +121,7 @@ function stopGame() {
 }
 
 
-// Handle arrow key controls
+// HANDLE ARROW KEY CONTROLS
 document.addEventListener("keydown", (e) => {
     switch (e.key) {
         case "ArrowUp":
@@ -126,3 +138,13 @@ document.addEventListener("keydown", (e) => {
             break;
     }
 });
+
+/* TEST METHODS/FUNCTIONS */
+// Add a click event listener to the canvas
+//canvas.addEventListener("click", function (e) {
+    // Get the coordinates of the click relative to the canvas
+    //var x = e.clientX - canvas.getBoundingClientRect().left;
+    //var y = e.clientY - canvas.getBoundingClientRect().top;
+    // Log the coordinates to the console
+    //cl(`Clicked at coordinates: X=${x}, Y=${y}`);
+//});
