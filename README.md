@@ -8,12 +8,25 @@ Our project aims to create a Classic Snake game using JavaScript. The game will 
 
 ### Links and Resources
 
-[User Stories](https://docs.google.com/document/d/1WjaIpBPHJSYX6xikpz2NYYcdhOgO1v_t4116xb7SXDI/edit?usp=sharing)
+#### A. Wireframes & Software Requirements
 
-[Wireframe](project-ideas/kiddsidea.tldr)
+1. [User Stories](https://docs.google.com/document/d/1WjaIpBPHJSYX6xikpz2NYYcdhOgO1v_t4116xb7SXDI/edit?usp=sharing)
 
-[Submission link](https://theeastcode.github.io/ClassicSnakeGame/)
+2. [Project Management Tasks List](https://app.asana.com/0/1205909841408792/1205909841408792)
 
+3. [Wireframe](Wireframe&Reqs/kiddsidea.tldr)
+
+    ![Wireframe Image](Wireframe&Reqs/wireframe.png)
+
+4. [Database Schema](Wireframe&Reqs/databaseschema.md)
+
+5. [Domain Model](Wireframe&Reqs/domain-model.md)
+
+#### B. Submission Link
+
+1. [Submission Link](https://theeastcode.github.io/ClassicSnakeGame/)
+
+2. [Repo Link](https://github.com/TheEastCode/ClassicSnakeGame.git)
 
 
 ### Lighthouse Accessibility Report Score

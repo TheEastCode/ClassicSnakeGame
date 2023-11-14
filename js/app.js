@@ -3,8 +3,8 @@ const cl = (input) => {console.log(input)};
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const boxSize = 20;
-const canvasSize = 800;
+const boxSize = 10;
+const canvasSize = 600;
 
 const startButton = document.getElementById('start').addEventListener('click', startGame);
 const resetButton = document.getElementById('reset').addEventListener('click', stopGame);
