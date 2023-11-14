@@ -2,6 +2,8 @@
 const cl = (input) => {console.log(input)};
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+let currentScore = 0;
+let highScore = localStorage.getItem('highScore') || 0;
 
 const boxSize = 20;
 const canvasSize = 800;
@@ -18,6 +20,7 @@ let direction = "right";
 function draw() {
     // Clear the canvas
     ctx.clearRect(0, 0, canvasSize, canvasSize);
+    
 
     // Draw the snake
     ctx.fillStyle = "#00FF00";
@@ -42,6 +45,14 @@ function draw() {
 function generateFood() {
     food.x = Math.floor(Math.random() * (canvasSize / boxSize));
     food.y = Math.floor(Math.random() * (canvasSize / boxSize));
+   
+
+    if (currentScore > highScore){
+        highScore = currentScore;
+        localStorage.setItem('highScore', highScore);
+        updateHighScore();
+    }
+    updateScore();
 }
 
 /* FUNCTION TO UPDATE SNAKE MOVEMENT AND UPDATE FOOD */
@@ -67,6 +78,7 @@ function update() {
     if (newHead.x === food.x && newHead.y === food.y) {
         snake.unshift({ x: food.x, y: food.y });
         generateFood();
+        currentScore += 5;
     } else {
         // Remove the tail if no collision with food
         snake.pop();
@@ -75,7 +87,7 @@ function update() {
     // Check for collision with walls
     if (newHead.x < 0 || newHead.x * boxSize >= canvasSize || newHead.y < 0 || newHead.y * boxSize >= canvasSize) {
         // Game over
-        alert("Game Over!");
+        alert(`Game Over! Your score  ${currentScore}`);
         resetGame();
         return;
     }
@@ -84,7 +96,7 @@ function update() {
     for (let i = 1; i < snake.length; i++) {
         if (newHead.x === snake[i].x && newHead.y === snake[i].y) {
             // Game over
-            alert("Game Over!");
+            alert(`Game Over! Your score  ${currentScore}`);
             resetGame();
             return;
         }
@@ -102,8 +114,21 @@ function resetGame() {
     snake = [{ x: 10, y: 10 }];
     generateFood();
     direction = "right";
+    currentScore = 0;
+
+    updateScore();
+    updateHighScore();
+}
+function initHighScore() {
+    const storedHighScore = localStorage.getItem('highScore');
+    if (storedHighScore) {
+        highScore = parseInt(storedHighScore);
+        updateHighScore();
+    }
 }
 
+// Generate initial food and start the game loop
+initHighScore();
 // Generate initial food and start the game loop
 generateFood();
 
@@ -111,6 +136,7 @@ function startGame() {
   if (!nIntervId) {
     nIntervId = setInterval(update, 100);
   }
+  
 }
 
 function stopGame() {
@@ -138,6 +164,22 @@ document.addEventListener("keydown", (e) => {
             break;
     }
 });
+
+
+
+
+// updates Scores and High Scores
+
+function updateHighScore(){
+    document.getElementById('high-score').textContent = `High Score  ${highScore}`;
+}
+
+function updateScore(){
+    document.getElementById('score').textContent = `Score: ${currentScore}`;
+}
+
+
+
 
 /* TEST METHODS/FUNCTIONS */
 // Add a click event listener to the canvas
