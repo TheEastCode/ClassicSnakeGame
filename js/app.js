@@ -1,10 +1,10 @@
 /* GLOBAL VARS */
 
 // Sound files and Variables
-var gameOverSound = new Audio("game-over.mp3");
-var gameStartSound = new Audio("game-start.mp3");
-var snakeTurnSound = new Audio("snake-turn.mp3");
-var snakeEatAppleSound = new Audio("snake-eat-apple.mp3");
+const gameOverSound = new Audio("game-over.mp3");
+const gameStartSound = new Audio("game-start.mp3");
+const snakeTurnSound = new Audio("snake-turn.mp3");
+const snakeEatAppleSound = new Audio("snake-eat-apple.mp3");
 gameStartSound.volume = 0.35;
 //
 
@@ -227,6 +227,9 @@ function toggleTutorial() {
       button.innerText = "How To Play";
     }
   }
+
+
+
 
  
 
